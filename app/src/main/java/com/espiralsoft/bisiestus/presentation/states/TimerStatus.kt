@@ -3,5 +3,6 @@ package com.espiralsoft.bisiestus.presentation.states
 import java.time.LocalDateTime
 
 data class TimerStatus(
-    val timeNow: LocalDateTime = LocalDateTime.now()
+    // Representa el año -999,999,999-01-01T00:00:00
+    val timeNow: LocalDateTime = LocalDateTime.MIN
 )
