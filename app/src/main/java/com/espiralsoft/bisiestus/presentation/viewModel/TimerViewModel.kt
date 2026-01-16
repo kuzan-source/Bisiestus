@@ -6,6 +6,7 @@ import com.espiralsoft.bisiestus.domain.usecase.GetCurrentDateUseCase
 import com.espiralsoft.bisiestus.presentation.states.TimerStatus
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.time.Duration
@@ -16,8 +17,8 @@ class TimerViewModel(
     private val currentDate: GetCurrentDateUseCase = GetCurrentDateUseCase()
 ) : ViewModel()
 {
-    private val _state: MutableStateFlow<TimerStatus> = MutableStateFlow(TimerStatus())
-    val state = _state.asStateFlow()
+    private val _state: MutableStateFlow<TimerState> = MutableStateFlow(TimerState(emptyList()))
+    val state: StateFlow<TimerState> = _state.asStateFlow()
 
     init {
         startCountdown()
