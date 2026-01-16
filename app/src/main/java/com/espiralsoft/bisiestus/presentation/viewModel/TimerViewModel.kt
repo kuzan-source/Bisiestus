@@ -46,13 +46,27 @@ class TimerViewModel(
         }
     }
 
-    private fun format(d: Duration): String {
-        val days = d.toDays()
-        val hours = d.toHours() % 24
-        val minutes = d.toMinutes() % 60
-        val seconds = d.seconds % 60
+    fun buildUnits(duration: Duration): List<TimerUnit> {
+        val days = duration.toDays()
+        val hours = duration.toHours() % 24
+        val minutes = duration.toMinutes() % 60
+        val seconds = duration.seconds % 60
 
-        return "%d días %02d:%02d:%02d".format(days, hours, minutes, seconds)
+        val units = mutableListOf<TimerUnit>()
+
+        if (days > 0) {
+            units += TimerUnit(days.toString(), "DÍAS")
+        }
+        if (days > 0 || hours > 0) {
+            units += TimerUnit("%02d".format(hours), "HORAS")
+        }
+        if (days > 0 || hours > 0 || minutes > 0) {
+            units += TimerUnit("%02d".format(minutes), "MIN")
+        }
+
+        units += TimerUnit("%02d".format(seconds), "SEG")
+
+        return units
     }
 
     private fun nextLeapYearUseCase(currentDate: LocalDateTime): LocalDateTime {
