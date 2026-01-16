@@ -2,8 +2,6 @@ package com.espiralsoft.bisiestus.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.espiralsoft.bisiestus.domain.usecase.GetCurrentDateUseCase
-import com.espiralsoft.bisiestus.presentation.states.TimerStatus
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,6 +10,9 @@ import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.Year
+import com.espiralsoft.bisiestus.domain.usecase.GetCurrentDateUseCase
+import com.espiralsoft.bisiestus.presentation.states.TimerState
+import com.espiralsoft.bisiestus.presentation.states.TimerUnit
 
 class TimerViewModel(
     private val currentDate: GetCurrentDateUseCase = GetCurrentDateUseCase()
@@ -35,9 +36,11 @@ class TimerViewModel(
                 val duration: Duration = Duration.between(currentDateTime, target)
 
                 if (!duration.isNegative) {
-                    _state.value = _state.value.copy(timeNow = format(duration))
+                    _state.value = _state.value.copy(
+                        units = buildUnits(duration)
+                    )
                 } else {
-                    _state.value = state.value.copy(timeNow = "Ya es año bisiesto")
+                    _state.value = state.value.copy()
                     break
                 }
                 delay(1000)
