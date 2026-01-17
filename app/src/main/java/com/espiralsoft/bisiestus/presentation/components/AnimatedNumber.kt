@@ -9,8 +9,6 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun AnimatedNumber(value: String) {
@@ -24,9 +22,7 @@ fun AnimatedNumber(value: String) {
     ) { target ->
         Text(
             text = target,
-            fontFamily = FontFamily.Monospace,
             style = MaterialTheme.typography.displayMedium,
-            fontWeight = FontWeight.Bold
         )
     }
 }
