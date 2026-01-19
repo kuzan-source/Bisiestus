@@ -1,7 +1,7 @@
 package com.espiralsoft.bisiestus.presentation.screens
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -11,8 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.espiralsoft.bisiestus.presentation.components.TimeBlock
-import com.espiralsoft.bisiestus.presentation.components.TimeSeparator
 import com.espiralsoft.bisiestus.presentation.components.TimerLayout
 import com.espiralsoft.bisiestus.presentation.viewModel.TimerViewModel
 
@@ -23,26 +21,16 @@ fun TimerScreen(
     // Obtenemos el estado del ViewModel
     val state by viewModel.state.collectAsState()
 
-    TimerLayout {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Próximo año bisiesto",
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.padding(top = 32.dp, bottom = 32.dp)
+        )
 
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-
-            Text(
-                text = "Próximo año bisiesto",
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(bottom = 24.dp)
-            )
-
-            Row {
-                state.units.forEachIndexed { index, unit ->
-                    if (index > 0) {
-                        TimeSeparator()
-                    }
-                    TimeBlock(unit.value, unit.label)
-                }
-            }
-
-        }
+        TimerLayout(units = state.units)
     }
-
 }
