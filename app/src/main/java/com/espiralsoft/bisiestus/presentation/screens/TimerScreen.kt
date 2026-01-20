@@ -1,8 +1,10 @@
 package com.espiralsoft.bisiestus.presentation.screens
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,15 +24,19 @@ fun TimerScreen(
     val state by viewModel.state.collectAsState()
 
     Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxSize()
     ) {
-        Text(
-            text = "Próximo año bisiesto",
-            style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(top = 32.dp, bottom = 32.dp)
-        )
-
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(120.dp)
+        ) {
+            Text(
+                text = "Próximo año bisiesto",
+                style = MaterialTheme.typography.titleLarge,
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
+        }
         TimerLayout(units = state.units)
     }
 }
