@@ -15,8 +15,7 @@ fun AnimatedNumber(value: String) {
     AnimatedContent(
         targetState = value,
         transitionSpec = {
-            slideInVertically { it } + fadeIn() togetherWith
-                    slideOutVertically { -it } + fadeOut()
+            slideInVertically { -it } + fadeIn() togetherWith slideOutVertically { it } + fadeOut()
         },
         label = "numberAnimation"
     ) { target ->
