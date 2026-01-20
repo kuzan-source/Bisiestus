@@ -80,9 +80,8 @@ class TimerViewModel(
         return LocalDateTime.of(year, 1, 1, 0, 0)
     }
 
-    private fun validateYearUseCase(currentDate: LocalDateTime): Boolean {
-        val currentYear: Int = currentDate.year
-        return Year.isLeap(currentYear.toLong())
+    private fun validateYear(currentDate: LocalDateTime): Boolean {
+        return Year.isLeap(currentDate.year.toLong())
     }
 
 }
