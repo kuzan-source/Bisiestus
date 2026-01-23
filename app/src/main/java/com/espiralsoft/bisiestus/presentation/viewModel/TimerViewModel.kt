@@ -29,7 +29,7 @@ class TimerViewModel(
 
         viewModelScope.launch {
             var currentDateTime: LocalDateTime = currentDate.invoke()
-            val target: LocalDateTime = nextLeapYearUseCase(currentDateTime)
+            val target: LocalDateTime = nextLeapDate(currentDateTime)
 
             while (true) {
 
@@ -72,12 +72,13 @@ class TimerViewModel(
         return units
     }
 
-    private fun nextLeapYearUseCase(currentDate: LocalDateTime): LocalDateTime {
-        var year: Int = (currentDate.year +1)
-        while (!Year.isLeap(year.toLong())) {
-            year++
+    private fun nextLeapDate(currentDate: LocalDateTime): LocalDateTime {
+        var date = currentDate
+        date = date.plusYears(1)
+        while (!validateYear(date)) {
+            date = date.plusYears(1)
         }
-        return LocalDateTime.of(year, 1, 1, 0, 0)
+        return LocalDateTime.of(date.year, 1, 1, 0, 0)
     }
 
     private fun validateYear(date: LocalDateTime): Boolean {
