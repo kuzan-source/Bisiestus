@@ -16,6 +16,7 @@ import com.espiralsoft.bisiestus.domain.usecase.ResolveCountdownTarget
 import com.espiralsoft.bisiestus.presentation.states.CountdownUiState
 
 class CountdownViewModel(
+    private val currentDate: GetCurrentDateUseCase = GetCurrentDateUseCase(),
     private val resolveCountdownTarget: ResolveCountdownTarget = ResolveCountdownTarget()
 ) : ViewModel() {
 
@@ -27,8 +28,7 @@ class CountdownViewModel(
     }
 
     private fun start() {
-        val now = LocalDateTime.now()
-        when (val target = resolveCountdownTarget.execute(now)) {
+        when (val target: CountdownTarget = resolveCountdownTarget.execute(currentDate())) {
 
             is CountdownTarget.IsFeb29 -> {
                 _uiState.value = CountdownUiState(isFeb29 = true)
