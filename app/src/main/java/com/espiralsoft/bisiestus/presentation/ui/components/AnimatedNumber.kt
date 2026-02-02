@@ -1,4 +1,4 @@
-package com.espiralsoft.bisiestus.presentation.components
+package com.espiralsoft.bisiestus.presentation.ui.components
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
