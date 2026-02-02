@@ -21,7 +21,7 @@ fun TimerScreen(
     viewModel: CountdownViewModel = CountdownViewModel(),
 ){
     // Obtenemos el estado del ViewModel
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.uiState.collectAsState()
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -37,6 +37,13 @@ fun TimerScreen(
                 modifier = Modifier.align(Alignment.BottomCenter)
             )
         }
-        TimerLayout(units = state.units)
+        if (state.isFeb29) {
+            Text(
+                text = "Es 29 de feb",
+                style = MaterialTheme.typography.headlineMedium
+            )
+        } else {
+            TimerLayout(units = state)
+        }
     }
 }
