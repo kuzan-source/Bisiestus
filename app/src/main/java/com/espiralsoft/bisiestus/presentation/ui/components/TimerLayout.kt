@@ -1,4 +1,4 @@
-package com.espiralsoft.bisiestus.presentation.components
+package com.espiralsoft.bisiestus.presentation.ui.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
