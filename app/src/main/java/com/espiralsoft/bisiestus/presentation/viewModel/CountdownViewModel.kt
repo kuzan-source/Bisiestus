@@ -43,8 +43,7 @@ class CountdownViewModel(
     private fun startCountdown(target: LocalDateTime) {
         viewModelScope.launch {
             while (isActive) {
-                val now = LocalDateTime.now()
-                val duration = Duration.between(now, target)
+                val duration: Duration = Duration.between(currentDate(), target)
 
                 if (duration.isNegative || duration.isZero) {
                     _uiState.value = CountdownUiState()
@@ -52,12 +51,12 @@ class CountdownViewModel(
                     return@launch
                 }
 
-                val totalSeconds = duration.seconds
+                val totalSeconds:Long = duration.seconds
 
-                val days = totalSeconds / 86_400
-                val hours = (totalSeconds % 86_400) / 3_600
-                val minutes = (totalSeconds % 3_600) / 60
-                val seconds = totalSeconds % 60
+                val days: Long = totalSeconds / 86_400
+                val hours: Long = (totalSeconds % 86_400) / 3_600
+                val minutes: Long = (totalSeconds % 3_600) / 60
+                val seconds: Long = totalSeconds % 60
 
                 _uiState.value = CountdownUiState(
                     days = days,
