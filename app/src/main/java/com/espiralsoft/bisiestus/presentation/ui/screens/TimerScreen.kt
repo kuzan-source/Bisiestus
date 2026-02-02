@@ -1,4 +1,4 @@
-package com.espiralsoft.bisiestus.presentation.screens
+package com.espiralsoft.bisiestus.presentation.ui.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
