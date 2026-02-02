@@ -2,9 +2,6 @@ package com.espiralsoft.bisiestus.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.espiralsoft.bisiestus.domain.model.CountdownTarget
-import com.espiralsoft.bisiestus.domain.usecase.ResolveCountdownTarget
-import com.espiralsoft.bisiestus.presentation.states.CountdownUiState
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +10,10 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import java.time.Duration
 import java.time.LocalDateTime
-
+import com.espiralsoft.bisiestus.domain.model.CountdownTarget
+import com.espiralsoft.bisiestus.domain.usecase.GetCurrentDateUseCase
+import com.espiralsoft.bisiestus.domain.usecase.ResolveCountdownTarget
+import com.espiralsoft.bisiestus.presentation.states.CountdownUiState
 
 class CountdownViewModel(
     private val resolveCountdownTarget: ResolveCountdownTarget = ResolveCountdownTarget()
