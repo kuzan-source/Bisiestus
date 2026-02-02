@@ -13,12 +13,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.espiralsoft.bisiestus.presentation.components.TimerLayout
-import com.espiralsoft.bisiestus.presentation.viewModel.TimerViewModel
+import com.espiralsoft.bisiestus.presentation.ui.components.TimerLayout
+import com.espiralsoft.bisiestus.presentation.viewModel.CountdownViewModel
 
 @Composable
 fun TimerScreen(
-    viewModel: TimerViewModel = TimerViewModel(),
+    viewModel: CountdownViewModel = CountdownViewModel(),
 ){
     // Obtenemos el estado del ViewModel
     val state by viewModel.state.collectAsState()
