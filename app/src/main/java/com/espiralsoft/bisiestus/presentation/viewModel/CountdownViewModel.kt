@@ -53,12 +53,14 @@ class CountdownViewModel(
 
                 val totalSeconds:Long = duration.seconds
 
-                val days: Long = totalSeconds / 86_400
+                val weeks: Long = totalSeconds / 604_800
+                val days: Long = (totalSeconds % 604_800) / 86_400
                 val hours: Long = (totalSeconds % 86_400) / 3_600
                 val minutes: Long = (totalSeconds % 3_600) / 60
                 val seconds: Long = totalSeconds % 60
 
                 _uiState.value = CountdownUiState(
+                    weeks = weeks,
                     days = days,
                     hours = hours,
                     minutes = minutes,
