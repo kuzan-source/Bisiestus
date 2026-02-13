@@ -14,6 +14,10 @@ fun VerticalTimerContent(units: CountdownUiState) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         TimeBlock(
+            value = units.weeks.toString(),
+            label = "Semanas"
+        )
+        TimeBlock(
             value = units.days.toString(),
             label = "Dias"
         )
