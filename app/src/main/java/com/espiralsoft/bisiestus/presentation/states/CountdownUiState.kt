@@ -1,6 +1,7 @@
 package com.espiralsoft.bisiestus.presentation.states
 
 data class CountdownUiState(
+    val weeks: Long = 0,
     val days: Long = 0,
     val hours: Long = 0,
     val minutes: Long = 0,
