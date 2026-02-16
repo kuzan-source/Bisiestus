@@ -2,7 +2,6 @@ package com.espiralsoft.bisiestus.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,7 +15,7 @@ import com.espiralsoft.bisiestus.domain.usecase.ResolveCountdownTarget
 import com.espiralsoft.bisiestus.presentation.states.CountdownUiState
 
 class CountdownViewModel(
-    private val currentDate: GetCurrentDateUseCase = GetCurrentDateUseCase(),
+    private val getCurrentDate: GetCurrentDateUseCase = GetCurrentDateUseCase(),
     private val resolveCountdownTarget: ResolveCountdownTarget = ResolveCountdownTarget()
 ) : ViewModel() {
 
@@ -24,34 +23,35 @@ class CountdownViewModel(
     val uiState: StateFlow<CountdownUiState> = _uiState
 
     init {
-        start()
+        observeTime()
     }
 
-    private fun start() {
-        when (val target: CountdownTarget = resolveCountdownTarget.execute(currentDate())) {
+    private fun observeTime() {
+        viewModelScope.launch {
+            while (isActive) {
 
-            is CountdownTarget.IsFeb29 -> {
-                _uiState.value = CountdownUiState(isFeb29 = true)
-            }
+                val now: LocalDateTime = getCurrentDate()
+                when (val target = resolveCountdownTarget.execute(now)) {
 
-            is CountdownTarget.Target -> {
-                startCountdown(target.dateTime)
+                    is CountdownTarget.IsFeb29 -> {
+                        _uiState.value = CountdownUiState(isFeb29 = true)
+                    }
+
+                    is CountdownTarget.Target -> {
+                        val duration = Duration.between(now, target.dateTime)
+
+                        if (duration.isNegative || duration.isZero) {
+                            _uiState.value = CountdownUiState()
+                        } else {
+                            _uiState.value = duration.toUiState()
+                        }
+                    }
+                }
+
+                delay(1_000)
             }
         }
     }
-
-    private fun startCountdown(target: LocalDateTime) {
-        viewModelScope.launch {
-            while (isActive) {
-                val duration: Duration = Duration.between(currentDate(), target)
-
-                if (duration.isNegative || duration.isZero) {
-                    _uiState.value = CountdownUiState()
-                    cancel()
-                    return@launch
-                }
-
-                val totalSeconds:Long = duration.seconds
 
     private fun Duration.toUiState(): CountdownUiState {
         val totalSeconds = seconds
