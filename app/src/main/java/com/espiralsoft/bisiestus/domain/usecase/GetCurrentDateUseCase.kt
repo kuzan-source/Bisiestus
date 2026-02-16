@@ -1,13 +1,13 @@
 package com.espiralsoft.bisiestus.domain.usecase
 
-import com.espiralsoft.bisiestus.data.repository.DateLocalImp
 import java.time.LocalDateTime
+import com.espiralsoft.bisiestus.data.repository.DateLocalImpl
+import com.espiralsoft.bisiestus.domain.repository.DateRepository
 
 class GetCurrentDateUseCase(
-    private val dataRepository: DateLocalImp = DateLocalImp()
-)
-{
-    suspend operator fun invoke(): LocalDateTime {
-        return dataRepository.getCurrentTime()
+    private val dateRepository: DateRepository = DateLocalImpl()
+) {
+    operator fun invoke(): LocalDateTime {
+        return dateRepository.now()
     }
 }
