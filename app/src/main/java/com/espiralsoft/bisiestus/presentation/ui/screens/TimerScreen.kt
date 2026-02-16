@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.espiralsoft.bisiestus.presentation.ui.components.Text29FebLayout
 import com.espiralsoft.bisiestus.presentation.ui.components.TimerLayout
 import com.espiralsoft.bisiestus.presentation.viewModel.CountdownViewModel
 
@@ -38,10 +39,7 @@ fun TimerScreen(
             )
         }
         if (state.isFeb29) {
-            Text(
-                text = "Es 29 de feb",
-                style = MaterialTheme.typography.headlineMedium
-            )
+            Text29FebLayout()
         } else {
             TimerLayout(units = state)
         }
