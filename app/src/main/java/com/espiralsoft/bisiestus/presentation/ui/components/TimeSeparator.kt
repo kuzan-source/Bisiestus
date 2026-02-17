@@ -1,4 +1,4 @@
-package com.espiralsoft.bisiestus.presentation.components
+package com.espiralsoft.bisiestus.presentation.ui.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
