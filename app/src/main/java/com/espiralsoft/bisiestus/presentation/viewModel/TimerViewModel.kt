@@ -81,8 +81,8 @@ class TimerViewModel(
         return LocalDateTime.of(date.year, 1, 1, 0, 0)
     }
 
-    private fun validateYear(date: LocalDateTime): Boolean {
-        return Year.isLeap(date.year.toLong())
+    private fun validateYear(currentDate: LocalDateTime): Boolean {
+        return Year.isLeap(currentDate.year.toLong())
     }
 
 }
