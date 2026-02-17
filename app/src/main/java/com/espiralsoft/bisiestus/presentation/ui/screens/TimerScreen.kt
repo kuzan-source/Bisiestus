@@ -1,10 +1,10 @@
 package com.espiralsoft.bisiestus.presentation.ui.screens
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,7 +12,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.espiralsoft.bisiestus.presentation.ui.components.ElegantBackground
 import com.espiralsoft.bisiestus.presentation.ui.components.Text29FebLayout
 import com.espiralsoft.bisiestus.presentation.ui.components.TimerLayout
 import com.espiralsoft.bisiestus.presentation.viewModel.CountdownViewModel
@@ -20,28 +22,40 @@ import com.espiralsoft.bisiestus.presentation.viewModel.CountdownViewModel
 @Composable
 fun TimerScreen(
     viewModel: CountdownViewModel = CountdownViewModel(),
-){
-    // Obtenemos el estado del ViewModel
+) {
+
     val state by viewModel.uiState.collectAsState()
 
-    Column(
-        modifier = Modifier.fillMaxSize()
+    //TODO(Este valor tiene que cambiar dinamicamente)
+    val progress = 0f
+
+    ElegantBackground(
+        progress = progress,
+        isFeb29 = state.isFeb29
     ) {
-        Box(
+
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(120.dp)
+                .fillMaxSize()
+                .padding(32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+            Spacer(modifier = Modifier.height(60.dp))
+
             Text(
                 text = "Próximo año bisiesto",
                 style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.align(Alignment.BottomCenter)
+                color = Color.White.copy(alpha = 0.85f)
             )
-        }
-        if (state.isFeb29) {
-            Text29FebLayout()
-        } else {
-            TimerLayout(units = state)
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            if (state.isFeb29) {
+                Text29FebLayout()
+            } else {
+                TimerLayout(units = state)
+            }
         }
     }
 }
