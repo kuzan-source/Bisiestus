@@ -31,14 +31,14 @@ class CountdownViewModel(
             while (isActive) {
 
                 val now: LocalDateTime = getCurrentDate()
-                when (val target = resolveCountdownTarget.execute(now)) {
+                when (val target: CountdownTarget = resolveCountdownTarget.execute(now)) {
 
                     is CountdownTarget.IsFeb29 -> {
                         _uiState.value = CountdownUiState(isFeb29 = true)
                     }
 
                     is CountdownTarget.Target -> {
-                        val duration = Duration.between(now, target.dateTime)
+                        val duration: Duration = Duration.between(now, target.dateTime)
 
                         if (duration.isNegative || duration.isZero) {
                             _uiState.value = CountdownUiState()
