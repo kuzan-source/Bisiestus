@@ -54,19 +54,19 @@ class CountdownViewModel(
     }
 
     private fun Duration.toUiState(): CountdownUiState {
-        val totalSeconds = seconds
+        val totalSeconds: Long = seconds
 
-        val weeks = totalSeconds / 604_800
-        val remainingAfterWeeks = totalSeconds % 604_800
+        val weeks: Long = totalSeconds / 604_800
+        val remainingAfterWeeks: Long = totalSeconds % 604_800
 
-        val days = remainingAfterWeeks / 86_400
-        val remainingAfterDays = remainingAfterWeeks % 86_400
+        val days: Long = remainingAfterWeeks / 86_400
+        val remainingAfterDays: Long = remainingAfterWeeks % 86_400
 
-        val hours = remainingAfterDays / 3_600
-        val remainingAfterHours = remainingAfterDays % 3_600
+        val hours: Long = remainingAfterDays / 3_600
+        val remainingAfterHours: Long = remainingAfterDays % 3_600
 
-        val minutes = remainingAfterHours / 60
-        val seconds = remainingAfterHours % 60
+        val minutes: Long = remainingAfterHours / 60
+        val seconds: Long = remainingAfterHours % 60
 
         return CountdownUiState(
             weeks = weeks,
