@@ -45,7 +45,7 @@ fun TimerScreen(
             Text(
                 text = "Próximo año bisiesto",
                 style = MaterialTheme.typography.titleLarge,
-                color = Color.White.copy(alpha = 0.85f)
+                color = Color.White.copy(alpha = 0.9f)
             )
 
             Spacer(modifier = Modifier.height(32.dp))
