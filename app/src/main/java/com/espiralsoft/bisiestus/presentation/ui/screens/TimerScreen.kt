@@ -26,8 +26,7 @@ fun TimerScreen(
 
     val state by viewModel.uiState.collectAsState()
 
-    //TODO(Este valor tiene que cambiar dinamicamente)
-    val progress = 0f
+    val progress: Float = state.progressionColor
 
     ElegantBackground(
         progress = progress,
