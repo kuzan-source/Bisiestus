@@ -8,7 +8,7 @@ import com.espiralsoft.bisiestus.presentation.states.CountdownUiState
 @Composable
 fun HorizontalTimerContent(units: CountdownUiState) {
     Row(
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.Top
     ) {
         TimeBlock(
             value = units.weeks.toString(),
