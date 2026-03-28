@@ -28,10 +28,8 @@ fun TimerScreen(
 
     val state by viewModel.uiState.collectAsState()
 
-    val progress: Float = state.progressionColor
-
     ElegantBackground(
-        progress = progress,
+        progress = state.progressionColor,
         isFeb29 = state.isFeb29
     ) {
 
@@ -61,4 +59,5 @@ fun TimerScreen(
             }
         }
     }
+
 }
