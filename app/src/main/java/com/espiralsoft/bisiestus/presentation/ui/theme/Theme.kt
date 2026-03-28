@@ -22,6 +22,32 @@ private val LightColorScheme = lightColorScheme(
     tertiary = Pink40
 )
 
+/**
+ * Resuelve el [ColorScheme] apropiado en función de las preferencias del tema
+ * y las capacidades del sistema.
+ *
+ * Permite seleccionar entre esquemas de color dinámicos (disponibles en Android 12+)
+ * y esquemas de color estáticos claros u oscuros.
+ *
+ * @param darkTheme Indica si el dispositivo se encuentra en modo oscuro.
+ */
+private fun resolveColorScheme(
+    darkTheme: Boolean,
+    dynamicColor: Boolean,
+    context: Context
+): ColorScheme = when {
+
+    // Si el dispositivo es compatible con el color dinámico
+    dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
+        if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+
+    // Si el dispositivo está en modo oscuro
+    darkTheme -> DarkColorScheme
+
+    // En cualquier otro caso(El dispositivo está en modo claro)
+    else -> LightColorScheme
+}
+
 @Composable
 fun BisiestusTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
