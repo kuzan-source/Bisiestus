@@ -10,12 +10,18 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
+/**
+ * Esquema de colores para el modo oscuro
+ */
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
     tertiary = Pink80
 )
 
+/**
+ * Esquema de colores para el modo claro
+ */
 private val LightColorScheme = lightColorScheme(
     primary = Purple40,
     secondary = PurpleGrey40,
@@ -48,6 +54,16 @@ private fun resolveColorScheme(
     else -> LightColorScheme
 }
 
+/**
+ * Configura el tema Material 3 de la app
+ *
+ * Este tema gestiona la selección de la combinación de colores (incluida la compatibilidad con
+ * colores dinámicos en Android 12+), configura la tipografía y administra la apariencia de la
+ * interfaz de usuario del sistema en función del modo de tema actual.
+ *
+ * @param dynamicColor Indica si se debe usar el color dinámico en los dispositivos compatibles.
+ * @param content Contenido de la interfaz de usuario.
+ */
 @Composable
 fun BisiestusTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
