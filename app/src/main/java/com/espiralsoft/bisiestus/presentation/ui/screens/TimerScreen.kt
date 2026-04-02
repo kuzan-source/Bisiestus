@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.espiralsoft.bisiestus.presentation.ui.components.ElegantBackground
+import com.espiralsoft.bisiestus.presentation.ui.components.ChangingBackground
 import com.espiralsoft.bisiestus.presentation.ui.components.Text29FebLayout
 import com.espiralsoft.bisiestus.presentation.ui.components.TimerLayout
 import com.espiralsoft.bisiestus.presentation.viewModel.CountdownViewModel
@@ -28,7 +28,7 @@ fun TimerScreen(
 
     val state by viewModel.uiState.collectAsState()
 
-    ElegantBackground(
+    ChangingBackground(
         progress = state.progressionColor,
         isFeb29 = state.isFeb29
     ) {
