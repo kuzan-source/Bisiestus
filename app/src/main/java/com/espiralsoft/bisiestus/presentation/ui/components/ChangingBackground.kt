@@ -14,7 +14,7 @@ import androidx.compose.ui.graphics.lerp
 
 
 @Composable
-fun ElegantBackground(
+fun ChangingBackground(
     progress: Float,
     isFeb29: Boolean,
     content: @Composable () -> Unit
