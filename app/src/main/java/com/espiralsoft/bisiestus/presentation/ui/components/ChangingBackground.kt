@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -31,32 +32,35 @@ fun ChangingBackground(
     content: @Composable () -> Unit
 ) {
 
-    val animatedProgress by animateFloatAsState(
+    val animatedProgress: Float by animateFloatAsState(
         targetValue = progress,
-        animationSpec = tween(durationMillis = 1500)
+        animationSpec = tween(durationMillis = 1000)
     )
 
-    val topColor = lerp(
-        Color(0xFF0B1C2D), // Azul petróleo oscuro
-        Color(0xFF1E3A5F), // Azul más luminoso
+    val topColor: Color = lerp(
+        MaterialTheme.colorScheme.primary,
+        MaterialTheme.colorScheme.secondary,
         animatedProgress
     )
 
-    val bottomColor = lerp(
-        Color(0xFF1A1028), // Violeta profundo
-        Color(0xFF3A1F5D), // Violeta más brillante
+    val bottomColor: Color = lerp(
+        MaterialTheme.colorScheme.secondary,
+        MaterialTheme.colorScheme.tertiary,
         animatedProgress
     )
 
-    val finalTop = if (isFeb29) Color(0xFF2C3E80) else topColor
-    val finalBottom = if (isFeb29) Color(0xFF5A2E91) else bottomColor
+    val finalTop: Color = if (isFeb29) MaterialTheme.colorScheme.tertiary else topColor
+    val finalBottom: Color = if (isFeb29) MaterialTheme.colorScheme.secondary else bottomColor
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    colors = listOf(finalTop, finalBottom)
+                    0.0f to finalTop,
+                    0.50f to MaterialTheme.colorScheme.background,
+                    0.55f to MaterialTheme.colorScheme.background,
+                    1.0f to finalBottom
                 )
             )
     ) {
