@@ -75,7 +75,11 @@ private fun resolveColorScheme(
  */
 @Composable
 fun BisiestusTheme(
-    dynamicColor: Boolean = true,
+    // Indica si se debe usar el color dinámico
+    // Nota: Lo desactivo porque cambia la vision de cómo lo quiero
+    dynamicColor: Boolean = false,
+
+    // Contenido de la interfaz de usuario
     content: @Composable () -> Unit
 ) {
 
