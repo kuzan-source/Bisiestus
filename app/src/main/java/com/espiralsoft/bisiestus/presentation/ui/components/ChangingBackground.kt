@@ -12,7 +12,18 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 
-
+/**
+ * Un componente que proporciona un fondo degradado dinámico y
+ * animado basado en el progreso y el estado del año bisiesto.
+ *
+ * El fondo utiliza un degradado vertical que interpola entre diferentes colores del tema
+ * Material Design a medida que cambia el valor de [progress]. Si [isFeb29] es verdadero,
+ * aplica una combinación de colores específica para el día bisiesto.
+ *
+ * @param progress Valor decimal (entre 0 y 1) que se utiliza para animar la transición entre colores.
+ * @param isFeb29 Un indicador booleano que señala si hoy es 29 de febrero.
+ * @param content El contenido de la interfaz de usuario, se mostrará sobre el fondo animado.
+ */
 @Composable
 fun ChangingBackground(
     progress: Float,
