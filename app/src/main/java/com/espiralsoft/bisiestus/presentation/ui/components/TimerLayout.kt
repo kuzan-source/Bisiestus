@@ -15,7 +15,6 @@ import com.espiralsoft.bisiestus.presentation.states.CountdownUiState
 fun TimerLayout(
     units: CountdownUiState
 ) {
-    val orientacionScreen: Int = LocalConfiguration.current.orientation
 
     Box(
         modifier = Modifier
@@ -23,7 +22,7 @@ fun TimerLayout(
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
-        if (orientacionScreen == Configuration.ORIENTATION_LANDSCAPE) {
+        if ( LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             HorizontalTimerContent(units)
         } else {
             VerticalTimerContent(units)
