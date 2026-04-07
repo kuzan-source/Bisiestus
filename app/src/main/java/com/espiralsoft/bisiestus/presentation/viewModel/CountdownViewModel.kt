@@ -21,6 +21,7 @@ class CountdownViewModel(
 
     private val _uiState = MutableStateFlow(CountdownUiState())
     val uiState: StateFlow<CountdownUiState> = _uiState
+    val maxSeconds: Int = 1372 * 86400 // Numero de dias * segundos en un dia
 
     init {
         observeTime()
@@ -65,15 +66,16 @@ class CountdownViewModel(
         val hours: Long = remainingAfterDays / 3_600
         val remainingAfterHours: Long = remainingAfterDays % 3_600
 
-        val minutes: Long = remainingAfterHours / 60
-        val seconds: Long = remainingAfterHours % 60
+
+        val progressionColor: Float = totalSeconds.toFloat() / maxSeconds.toFloat()
 
         return CountdownUiState(
             weeks = weeks,
             days = days,
             hours = hours,
             minutes = minutes,
-            seconds = seconds
+            seconds = seconds,
+            progressionColor = progressionColor
         )
     }
 }
