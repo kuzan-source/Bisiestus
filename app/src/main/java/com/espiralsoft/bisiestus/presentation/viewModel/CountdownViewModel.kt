@@ -1,5 +1,6 @@
 package com.espiralsoft.bisiestus.presentation.viewModel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
@@ -21,7 +22,7 @@ class CountdownViewModel(
 
     private val _uiState = MutableStateFlow(CountdownUiState())
     val uiState: StateFlow<CountdownUiState> = _uiState
-    val maxSeconds: Int = 1372 * 86400 // Numero de dias * segundos en un dia
+    val maxSeconds: Int = 1_431 * 86_400 // Numero de dias * segundos en un dia
 
     init {
         observeTime()
@@ -55,19 +56,21 @@ class CountdownViewModel(
     }
 
     private fun Duration.toUiState(): CountdownUiState {
-        val totalSeconds: Long = seconds
+        val totalSeconds: Int = seconds.toInt()
 
-        val weeks: Long = totalSeconds / 604_800
-        val remainingAfterWeeks: Long = totalSeconds % 604_800
+        val weeks: Int = totalSeconds / 604_800
+        val remainingAfterWeeks: Int = totalSeconds % 604_800
 
-        val days: Long = remainingAfterWeeks / 86_400
-        val remainingAfterDays: Long = remainingAfterWeeks % 86_400
+        val days: Int = remainingAfterWeeks / 86_400
+        val remainingAfterDays: Int = remainingAfterWeeks % 86_400
 
-        val hours: Long = remainingAfterDays / 3_600
-        val remainingAfterHours: Long = remainingAfterDays % 3_600
+        val hours: Int = remainingAfterDays / 3_600
+        val remainingAfterHours: Int = remainingAfterDays % 3_600
 
+        val minutes: Int = remainingAfterHours / 60
+        val seconds: Int = remainingAfterHours % 60
 
-        val progressionColor: Float = totalSeconds.toFloat() / maxSeconds.toFloat()
+        val progressionColor: Float = 1 - totalSeconds.toFloat() / maxSeconds.toFloat()
 
         return CountdownUiState(
             weeks = weeks,
@@ -77,5 +80,6 @@ class CountdownViewModel(
             seconds = seconds,
             progressionColor = progressionColor
         )
+
     }
 }
