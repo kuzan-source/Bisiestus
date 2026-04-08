@@ -5,7 +5,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Color
 
 @Composable
 fun TimeBlock(
@@ -19,7 +18,7 @@ fun TimeBlock(
         Text(
             text = label,
             style = MaterialTheme.typography.labelMedium,
-            color = Color.White.copy(alpha = 0.9f),
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }
